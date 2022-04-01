@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
+struct fun_desc {
+    char *name;
+    char (*fun)(char);
+};
 
 
 char censor(char c) {
@@ -51,11 +55,18 @@ char my_get(char c) {
     return c;
 }
 
+char quit(char c) {
+    if(c == 'q')
+       exit(0);
+    return c;
+}
+
 
 
 int main(int argc, char **argv){
-    char arr1[] = {'H','e','y','!'};
-    char* arr2 = map(arr1, 4, my_get);
-    printf("%s\n", arr2);
+    char arr1[5] = {'\0','\0','\0','\0','\0'};
+    struct fun_desc menu[] = { { "Censor", censor }, { "Encrypt", encrypt }, { "Decrypt", decrypt },{ "Print dec", dprt },{ "Print string", cprt },{ "Get string", my_get },{ "Quit", quit }, { NULL, NULL }  };
+    char* arr2 = map(arr1, 4, encrypt);
+    printf("%s", arr2);
     free(arr2);
 }
