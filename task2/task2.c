@@ -68,7 +68,9 @@ struct fun_desc menu[] = { { "Censor", censor }, { "Encrypt", encrypt }, { "Decr
 
 int main(int argc, char **argv){
 
-    char carry[5] = {'\0','\0','\0','\0','\0'};
+    char *carry = NULL;
+    int numberOfChars = 5;
+    carry = (char*)calloc(numberOfChars + 1, sizeof(char));
     while (1 != 0) {
         int c;
         printf("please choose a function:\n");
@@ -87,7 +89,8 @@ int main(int argc, char **argv){
             return 0;
         }
         printf("Within bounds\n");
-        char* carry = map(carry, 5, menu[c].fun);
+        char* carry1 = map(carry, 5, menu[c].fun);
+        carry = carry1;
         printf("DONE\n");
 
     }
