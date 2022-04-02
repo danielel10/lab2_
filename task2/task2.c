@@ -67,16 +67,20 @@ struct fun_desc menu[] = { { "Censor", censor }, { "Encrypt", encrypt }, { "Decr
 
 
 int main(int argc, char **argv){
-    int c;
+
     char carry[5] = {'\0','\0','\0','\0','\0'};
     while (1 != 0) {
+        int c;
         printf("please choose a function:\n");
         for (int i = 0; i < 7; ++i) {
             printf("%d) %s\n",i,menu[i].name);
         }
         printf("option: ");
         c = (fgetc(stdin)) - 48;
-        fgetc(stdin);
+        if (c == -38)
+            c = (fgetc(stdin)) - 48;
+        else
+            fgetc(stdin);
         if (c < 0 || c > 6) {
             printf("Not within bounds");
             free(carry);
